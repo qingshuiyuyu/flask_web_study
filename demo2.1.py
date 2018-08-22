@@ -2,7 +2,7 @@
 # -*- coding=UTF-8 -*-
 
 from flask import Flask
-from flask import request,make_response
+from flask import request,make_response,redirect,abort
 
 
 app = Flask(__name__)
@@ -36,6 +36,20 @@ def makeres():
     response.set_cookie("key","hsakdhakj")
 
     return response
+
+
+@app.route("/red")
+def red():
+
+    return redirect("ua")
+
+@app.route("/users/<id>")
+def get_user(id):
+    if id:
+        return '<p>user id is:{}</p>'.format(id)
+
+    return abort(404)
+
 
 
 if __name__ == '__main__':
